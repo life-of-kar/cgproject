@@ -1,2 +1,2 @@
 # cgproject
-6th SEM CSE CG Project By Karthik
+6th SEM CSE CG Project 
