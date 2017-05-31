@@ -138,22 +138,18 @@ void displayMenus(void)
 
 		glColor3ub(175, 180, 178);
 
-		drawBitmapText("1. Night Lights", 50, 300, 0);
+		drawBitmapText("1. About Electricity", 50, 300, 0);
 		delay(200);
 		glFlush();
-		drawBitmapText("2. About Electricity", 50, 250, 0);
+		drawBitmapText("2. Plant Layout", 50, 250, 0);
 		delay(200);
 		glFlush();
 		drawBitmapText("3. Working Model", 50, 200, 0);
 		delay(200);
 		glFlush();
-
-		/*drawBitmapText("3. Plant Layout", 50, 200, 0);
+		drawBitmapText("4. Current Usage", 50, 150, 0);
 		delay(200);
-		glFlush();*/
-		/*drawBitmapText("4. Working Model", 50, 150, 0);
-		delay(200);
-		glFlush();*/
+		glFlush();
 
 	}
 	else if(wid > 500 && hei > 500)
@@ -169,22 +165,18 @@ void displayMenus(void)
 		alphaVal = 0.0;
 
 		glColor3ub(175, 180, 178);
-		drawBitmapText("1. Night Lights", 50, 300, 0);
+		drawBitmapText("1. About Electricity", 50, 300, 0);
 		delay(200);
 		glFlush();
-		drawBitmapText("2. About Electricity", 50, 250, 0);
+		drawBitmapText("2. Plant Layout", 50, 250, 0);
 		delay(200);
 		glFlush();
 		drawBitmapText("3. Working Model", 50, 200, 0);
 		delay(200);
 		glFlush();
-
-		/*drawBitmapText("3. Plant Layout", 50, 200, 0);
+		drawBitmapText("4. Current Usage", 50, 150, 0);
 		delay(200);
 		glFlush();
-		drawBitmapText("4. Working Model", 50, 150, 0);
-		delay(200);
-		glFlush();*/
 	}
 
 	delay(1500);
@@ -370,13 +362,11 @@ void keys(unsigned char key,int x,int y)
 	if(key=='m' || key == 'M')title();
 	if(key=='e' || key == 'E')exit (1);
 	if(key=='d' || key == 'D')display_operations();
-	if(key == '1') electroCity();
-	if(key == '2') sceneElectricity();
-	/*if(key == '3'){
-		plantLayout();
-		flag3D = 1;
-	}*/
+	
+	if(key == '1') sceneElectricity();
+	if(key == '2')	plantLayout();
 	if(key == '3') display1();
+	if(key == '4') electroCity();
 }
 
 
@@ -1643,7 +1633,8 @@ void drawCoolingTowers()
 
 void drawOfficeRoom()
 {
-	//left side
+
+	//left side 1
 	glColor3ub(100, 100, 100);
 	glBegin(GL_POLYGON);
 		glVertex2f(202.5, 255);
@@ -1651,7 +1642,7 @@ void drawOfficeRoom()
 		glVertex2f(265, 250);
 		glVertex2f(265, 222.5);
 	glEnd();
-	//goes right
+	//goes right 2
 	glColor3ub(80, 80, 80);
 	glBegin(GL_POLYGON);	
 		glVertex2f(265, 222.5);	
@@ -1659,7 +1650,7 @@ void drawOfficeRoom()
 		glVertex2f(300, 267.5);
 		glVertex2f(300, 239);
 	glEnd();
-	// another right
+	// another right 3
 	glColor3ub(100, 100, 100);
 	glBegin(GL_POLYGON);
 		glVertex2f(300, 239);
@@ -1667,7 +1658,17 @@ void drawOfficeRoom()
 		glVertex2f(332.5, 252.5);
 		glVertex2f(332.5, 225);		
 	glEnd();
-	//Last right 
+
+	//Not so last behind right 5
+	glColor3ub(80, 80, 80);
+	glBegin(GL_POLYGON);	
+		glVertex2f(347.5, 270);
+		glVertex2f(347.5, 292.5);
+		glVertex2f(362.5, 302.5);
+		glVertex2f(362.5, 277.5);
+	glEnd();
+
+	//Last right 4
 	glColor3ub(80, 80, 80);
 	glBegin(GL_POLYGON);	
 		glVertex2f(332.5, 225);
@@ -1675,20 +1676,213 @@ void drawOfficeRoom()
 		glVertex2f(377.5, 277.5);
 		glVertex2f(377.5, 255);
 	glEnd();
-	//Finally the roof
+	//Finally the roof behind
 	glColor3ub(105, 105, 105);
 	glBegin(GL_POLYGON);	
 		glVertex2f(202.5, 282.5); //1
 		glVertex2f(302.5, 325);//2
 		glVertex2f(362.5, 302.5);//3
 		glVertex2f(347.5, 292.5);//4
-		glVertex2f(377.5, 277.5);//5
-		glVertex2f(332.5, 252.5);//6
 		glVertex2f(300, 267.5);//7
 		glVertex2f(265, 250);//8
 	glEnd();
+	//roof front
+	glBegin(GL_POLYGON);
+		glVertex2f(347.5, 292.5);//4
+		glVertex2f(377.5, 277.5);//5
+		glVertex2f(332.5, 252.5);//6
+		glVertex2f(300, 267.5);//7
+	glEnd();
 
+	//roof's floor..
+	//gotta lift up na
+	glLineWidth(5);
+	glColor3ub(150, 150, 150);
+	glBegin(GL_LINE_STRIP);
+		glVertex2f(210, 282.5);//1
+		glVertex2f(300, 320);//2
+		glVertex2f(352.5, 301);//3
+		glVertex2f(337.5, 292.5);//4
+		glVertex2f(367.5, 277.5); //5
+		glVertex2f(332.5, 257.5); //6
+		glVertex2f(300, 272.5); //7
+		glVertex2f(265, 255); //8
+		glVertex2f(210, 282.5);//1
+	glEnd();
 
+	glColor3ub(200, 200, 200);
+	glBegin(GL_POLYGON);
+		glVertex2f(210, 282.5);//1
+		glVertex2f(300, 320);//2
+		glVertex2f(352.5, 301);//3
+		glVertex2f(337.5, 292.5);//4
+		glVertex2f(300, 272.5); //7
+		glVertex2f(265, 255); //8
+	glEnd();
+	glBegin(GL_POLYGON);
+		glVertex2f(337.5, 292.5);//4
+		glVertex2f(367.5, 277.5); //5
+		glVertex2f(332.5, 257.5); //6
+		glVertex2f(300, 272.5); //7
+	glEnd();
+
+}
+
+void drawMisc()
+{
+	//some solar panels on roof
+	
+	glColor3ub(50, 50, 50);
+	glLineWidth(4);
+	//p1
+	glBegin(GL_LINES);
+		glVertex2f(237.5, 282.5);
+		glVertex2f(247.5, 287.5);
+	glEnd();
+	//p2
+	glBegin(GL_LINES);
+		glVertex2f(267.5, 265);
+		glVertex2f(282.5, 272.5);
+	glEnd();
+	//p3
+	glBegin(GL_LINES);
+		glVertex2f(337.5, 267.5);		
+		glVertex2f(347.5, 272.5);		
+	glEnd();
+	//p4
+	glBegin(GL_LINES);
+		glVertex2f(330, 295);
+		glVertex2f(340, 300);
+	glEnd();
+
+	
+	//Panel 1
+	glBegin(GL_POLYGON);
+	glColor3ub(0, 128, 255);
+		glVertex2f(227.5, 285);
+		glVertex2f(240, 291);
+	glColor3ub(102, 178, 255);
+		glVertex2f(247.5, 287.5);
+		glVertex2f(237.5, 282.5);
+	glEnd();
+
+	//Panel 2
+	glBegin(GL_POLYGON);
+	glColor3ub(0, 128, 255);
+		glVertex2f(260, 267.5);
+		glVertex2f(275, 275);
+	glColor3ub(102, 178, 255);
+		glVertex2f(282.5, 272.5);
+		glVertex2f(267.5, 265);
+	glEnd();
+
+	//Panel 3
+	glBegin(GL_POLYGON);
+	glColor3ub(0, 128, 255);
+		glVertex2f(327.5, 270);
+		glVertex2f(337.5, 275);
+	glColor3ub(102, 178, 255);
+		glVertex2f(347.5, 272.5);
+		glVertex2f(337.5, 267.5);
+	glEnd();
+
+	//Panel 4
+	glBegin(GL_POLYGON);
+	glColor3ub(0, 128, 255);
+		glVertex2f(322.5, 297.5);
+		glVertex2f(331, 302.5);
+	glColor3ub(102, 178, 255);
+		glVertex2f(340, 300);
+		glVertex2f(330, 295);
+	glEnd();
+
+	//Overhead Tanks
+	float ii;
+	//Tank 1.1
+	glColor3ub(140, 140, 140);
+	for(ii=0; ii<5; ii++)
+		DrawEllipse(255, 267.5+ii, 3, 2, 50);
+	glColor3ub(180, 180, 180);
+	DrawEllipse(255, 272.5, 3, 2, 50);
+	//tank 1.2
+	glColor3ub(120, 120, 120);
+	for(ii=0; ii<5; ii++)
+		DrawEllipse(260, 263+ii, 3, 2, 50);
+	glColor3ub(160, 160, 160);
+	DrawEllipse(260, 263+ii, 3, 2, 50);
+
+	//Tank 2.1
+	glColor3ub(140, 140, 140);
+	for(ii=0; ii<5; ii++)
+		DrawEllipse(307.5, 275+ii, 3, 2, 50);
+	glColor3ub(180, 180, 180);
+	DrawEllipse(307.5, 275+ii, 3, 2, 50);
+	//tank 2.2
+	glColor3ub(120, 120, 120);
+	for(ii=0; ii<5; ii++)
+		DrawEllipse(312, 273+ii, 3, 2, 50);
+	glColor3ub(160, 160, 160);
+	DrawEllipse(312, 273+ii, 3, 2, 50);
+
+	//Tank 3.1
+	glColor3ub(140, 140, 140);
+	for(ii=0; ii<5; ii++)
+		DrawEllipse(352.5, 277.5+ii, 3, 2, 50);
+	glColor3ub(180, 180, 180);
+	DrawEllipse(352.5, 277.5+ii, 3, 2, 50);
+	//tank 3.2
+	glColor3ub(120, 120, 120);
+	for(ii=0; ii<5; ii++)
+		DrawEllipse(357, 275+ii, 3, 2, 50);
+	glColor3ub(160, 160, 160);
+	DrawEllipse(357, 275+ii, 3, 2, 50);
+
+	//some windows
+	//Left side
+	glColor3ub(0, 128, 255);
+	FWinAlgo(237.5, 260, 5, 7.5, 2, 2.5);
+	FWinAlgo(244, 256, 5, 7.5, 2, 2.5);
+	FWinAlgo(251.5, 252, 5, 7.5, 2, 2.5);
+	FWinAlgo(258.5, 248, 5, 7.5, 2, 2.5);
+
+	//Right side
+	FWinAlgo(302.5, 262.5, 4, 3, 8, 2);
+	FWinAlgo(322.5, 252.5, 4, 3, 8, 2);
+}
+
+void drawContainers()
+{
+	float ii;
+
+	//Container 1
+	for(ii = 0; ii<20; ii++){
+		glColor3ub(125-ii*1.5, 125-ii*1.5, 125-ii*1.5);
+		DrawEllipse( 175, 237.5+ii, 27, 11, 50);
+	}
+	glColor3ub(150, 150, 150);
+	DrawEllipse( 175, 257.5, 27, 11, 50);
+	glColor3ub(200, 200, 200);
+	DrawEllipse( 175, 257.5, 25, 9, 50);
+
+	//container 2
+	for(ii = 0; ii<20; ii++){
+		glColor3ub(125-ii*1.5, 125-ii*1.5, 125-ii*1.5);
+		DrawEllipse( 207.5, 212.5+ii, 27, 11, 50);
+	}
+	glColor3ub(150, 150, 150);
+	DrawEllipse( 207, 232.5, 27, 11, 50);
+	glColor3ub(200, 200, 200);
+	DrawEllipse( 207, 232.5, 25, 9, 50);
+
+	//container 3
+	for(ii = 0; ii<20; ii++){
+		glColor3ub(125-ii*1.5, 125-ii*1.5, 125-ii*1.5);
+		DrawEllipse( 242.5, 192.5+ii, 27, 11, 50);
+	}
+	glColor3ub(150, 150, 150);
+	DrawEllipse( 242.5, 212.5, 27, 11, 50);
+	glColor3ub(200, 200, 200);
+	DrawEllipse( 242.5, 212.5, 25, 9, 50);
 
 
 }
@@ -1711,20 +1905,37 @@ void plantLayout()
 		glVertex2f(500, 500);
 		glVertex2f(500, 0);
 	glEnd();
+	drawStars();
 
 	drawBrownBase();
-
+	delay(500);
+	glFlush();
 	drawGreenBase();
-
+	delay(500);
+	glFlush();
 	drawPlantFloor();
-
+	
 	drawTrees();
+	delay(700);
+	glFlush();
 
 	drawCoolingTowers();
+	delay(700);
+	glFlush();
 	
 	drawOfficeRoom();
-		
-	//delay(1000);
+	delay(700);
+	glFlush();
+	
+	drawContainers();
+	delay(700);
+	glFlush();
+	
+	drawMisc();
+	glFlush();
+	
+	glLineWidth(1);
+	delay(1500);
 
 	glFlush();
 	//glutPostRedisplay();
@@ -2094,7 +2305,7 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 	chckWin();
 	//Introduction
-	//title();
+	title();
 	//displayMenus();
 
 	//Scene 1 Electricity
@@ -2107,7 +2318,7 @@ void display(void)
 	//display1();
 
 	//scene 4 plant layout
-	plantLayout();
+	//plantLayout();
 
     glFlush();
 	glutPostRedisplay();
