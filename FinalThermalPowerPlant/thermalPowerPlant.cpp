@@ -1427,26 +1427,308 @@ void buildings(float alpha)
 	polyBuildings(3, x2, y2);
 }
 
-// this might be 3D:)
-void plantLayout()
+//functions for plant layout... under this
+
+void drawBrownBase()
+{
+		
+	glLineWidth(10);
+	//left side
+	glColor3f(0.36, 0.25, 0.20); //dark brown 
+	glBegin(GL_POLYGON);
+		glVertex2f(35, 257.5);
+		glVertex2f(242.5, 90);
+		glVertex2f(242.5, 70);
+		glVertex2f(35, 242.5);
+	glEnd();
+
+	//right side
+	glColor3f(0.35, 0.16, 0.14); //very dark brown
+	glBegin(GL_POLYGON);
+		glVertex2f(242.5, 90);
+		glVertex2f(460, 257.5);
+		glVertex2f(460, 242.5);
+		glVertex2f(242.5, 70);		
+	glEnd();
+
+	//top side
+	glBegin(GL_POLYGON);
+	
+		glVertex2f(250, 337.5);
+	glColor3f(0.36, 0.25, 0.20); //dark brown 
+		glVertex2f(460, 257.5);		
+		glVertex2f(242.5, 90);
+	glColor3f(0.35, 0.16, 0.14); //very dark brown
+		glVertex2f(35, 257.5);		
+	glEnd();
+}
+
+void drawGreenBase()
+{
+	//left part
+	glColor3ub(102, 51, 0);
+	glBegin(GL_POLYGON);
+		glVertex2f(35, 262.5);
+		glVertex2f(242.5, 97.5);
+		glVertex2f(242.5, 90);
+		glVertex2f(35, 257.5);		
+	glEnd();
+
+	//right side
+	glColor3ub(51, 25, 0);
+	glBegin(GL_POLYGON);
+		glVertex2f(242.5, 97.5);
+		glVertex2f(460, 262.5);
+		glVertex2f(460, 257.5);
+		glVertex2f(242.5, 90);				
+	glEnd();	
+	//top part
+	glColor3f(0.419608, 0.556863, 0.137255);
+	glBegin(GL_POLYGON);
+		glVertex2f(35, 262.5);
+		glVertex2f(250, 340);
+		glVertex2f(460, 262.5);			
+		glVertex2f(242.5, 97.5);			
+	glEnd();	
+
+}
+
+
+void createTri(float x, float y, float size)
 {
 	
-	flag3D = 1;
-	//For 3D
-	/*glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_NORMALIZE);
+	glBegin(GL_TRIANGLES);
+		glVertex2f(x, y);
+		glVertex2f(x+(size/2), y+(size/1.5));
+		glVertex2f(x+size, y);
+	glEnd();
+}
 
-printf("normalize enables\n");*/
-	printf("%d", flag3D);
-	glColor3f(1, 1, 0);
-	drawBitmapText("Hello 3D guy", 100, 100, 0);
+void drawTrees()
+{
+	//Tree 1
+	glColor3f(0.13, 0.37, 0.31);
+	createTri(46, 263, 45);
+	createTri(51, 273, 35);
+	createTri(56, 283, 25);
+	createTri(61, 290, 15);
+	createTri(63, 295, 10);
+
+	//Tree 2
+	glColor3f(0.184314, 0.309804, 0.184314);
+	createTri(58, 250, 30);
+	createTri(63, 260, 20);
+	createTri(68, 268, 10);
+
+	//Tree 3
+	glColor3f(0.184314, 0.309804, 0.184314);
+	createTri(390, 275, 30);
+	createTri(393, 285, 23);
+	createTri(397, 295, 15);
+
+	//Tree 4
+	glColor3f(0.13, 0.37, 0.31);
+	createTri(410, 270, 20);
+	createTri(412, 277, 15);
+
+	//Tree 5
+	glColor3f(0.184314, 0.309804, 0.184314);
+	createTri(393, 248, 20);
+
+	//Tree 6
+	glColor3f(0.258824, 0.435294, 0.258824);
+	createTri(380, 242, 25);
+	createTri(385, 253, 15);
+
+	//Tree 7
+	glColor3f(0.184314, 0.309804, 0.184314);
+	createTri(200, 155, 15);
+	createTri(202.5, 162, 10);
+
+	//Tree 8
+	glColor3f(0.258824, 0.435294, 0.258824);
+	createTri(205, 145, 13);
+	createTri(207.5, 150, 8);
+}
+
+void drawPlantFloor()
+{
+	glColor3f(0.329412, 0.329412, 0.329412); //Dim gray
+	//lifting up
+	glLineWidth(5);
+	glBegin(GL_LINE_STRIP);
+		glVertex2f(92.5, 262.5);
+		glVertex2f(250, 322.5);
+		glVertex2f(402.5, 262.5);
+		glVertex2f(245, 155);
+		glVertex2f(92.5, 262.5);
+	glEnd();
+
+	//Actual floor	
+	glBegin(GL_POLYGON);
+	glColor3f(0.80, 0.80, 0.80);  //Vlight grey
+		glVertex2f(245, 157.5);
+		glVertex2f(92.5, 265);
+		glColor3f(0.658824, 0.658824, 0.658824); //light grey
+		glVertex2f(250, 325);
+		glVertex2f(402.5, 265);
+	glEnd();
+}
+
+void drawCoolingTowers()
+{
+	int ii, jj;
+	float r =0, g =0, b=0, radius1;
+	//Cooling tower 1, right
+	glColor3f(0.184314, 0.309804, 0.309804); //Dark Slate Grey
+	for(ii = 0 ; ii<10; ii++)
+		DrawEllipse(250, 300+ii, 40, 18, 50);
+	glColor3ub(128, 128, 128); //Dark Grey
+	DrawEllipse(250, 310, 40, 18, 50);
+	//Actual tower
 	
-glFlush();
-	flag3D = 0;
-	printf("%d", flag3D);
+	//Lot of Complex stuffs
+	for(jj=0; jj<90; ){
+		glColor3ub(204 - r, 204+-g, 204-b);
+		radius1 =35-(float)(jj/3.5);
+		DrawEllipse(250, 310+jj,radius1, 14, 50);
+		jj+=2;
+		r+=0.6; g+=0.6; b+=0.6;
+		if(radius1 < 21) jj = 90; //Stops wen it reaches certain radius
+	}
+	//gotta make curve :(
+	for(jj =0; jj<30; jj++){
+		glColor3ub(200 - r, 200+-g, 200-b);
+		radius1 = 20.5-(float)(jj/6);
+		DrawEllipse(250, 360+jj, radius1, 14, 50);
+		r+=0.9; g+=0.9; b+=0.9;
+	}
+	//At the top
+	glColor3ub(224, 224, 224);
+	DrawEllipse(250, 396, 15, 6, 50);
+	glColor3ub(64, 64, 64);
+	DrawEllipse(250, 396, 12, 5, 50);
+	r = 0; g = 0; b = 0;
+
+	//Cooling tower 2, left
+	glColor3f(0.184314, 0.309804, 0.3090); //Dark Slate Grey
+	for(ii = 0 ; ii<10; ii++)
+		DrawEllipse(186, 275+ii, 40, 18, 50);
+	glColor3ub(128, 128, 128); //Dark Grey
+	DrawEllipse(186, 285, 40, 18, 50);
+	//Lot of Complex stuffs
+	for(jj=0; jj<90; ){
+		glColor3ub(204 - r, 204+-g, 204-b);
+		radius1 =35-(float)(jj/3.5);
+		DrawEllipse(186, 285+jj,radius1, 14, 50);
+		jj+=2;
+		r+=0.6; g+=0.6; b+=0.6;
+		if(radius1 < 21) jj = 90; //Stops wen it reaches certain radius
+	}
+	//gotta make curve :(
+	for(jj =0; jj<30; jj++){
+		glColor3ub(200 - r, 200+-g, 200-b);
+		radius1 = 20.5-(float)(jj/6);
+		DrawEllipse(186, 330+jj, radius1, 14, 50);
+		r+=0.9; g+=0.9; b+=0.9;
+	}
+	//At the top
+	glColor3ub(224, 224, 224);
+	DrawEllipse(186, 367, 15, 6, 50);
+	glColor3ub(64, 64, 64);
+	DrawEllipse(186, 367, 12, 5, 50);
+	r = 0; g = 0; b = 0;
+}
+//Awesome
+
+void drawOfficeRoom()
+{
+	//left side
+	glColor3ub(100, 100, 100);
+	glBegin(GL_POLYGON);
+		glVertex2f(202.5, 255);
+		glVertex2f(202.5, 282.5);
+		glVertex2f(265, 250);
+		glVertex2f(265, 222.5);
+	glEnd();
+	//goes right
+	glColor3ub(80, 80, 80);
+	glBegin(GL_POLYGON);	
+		glVertex2f(265, 222.5);	
+		glVertex2f(265, 250);
+		glVertex2f(300, 267.5);
+		glVertex2f(300, 239);
+	glEnd();
+	// another right
+	glColor3ub(100, 100, 100);
+	glBegin(GL_POLYGON);
+		glVertex2f(300, 239);
+		glVertex2f(300, 267.5);		
+		glVertex2f(332.5, 252.5);
+		glVertex2f(332.5, 225);		
+	glEnd();
+	//Last right 
+	glColor3ub(80, 80, 80);
+	glBegin(GL_POLYGON);	
+		glVertex2f(332.5, 225);
+		glVertex2f(332.5, 252.5);
+		glVertex2f(377.5, 277.5);
+		glVertex2f(377.5, 255);
+	glEnd();
+	//Finally the roof
+	glColor3ub(105, 105, 105);
+	glBegin(GL_POLYGON);	
+		glVertex2f(202.5, 282.5); //1
+		glVertex2f(302.5, 325);//2
+		glVertex2f(362.5, 302.5);//3
+		glVertex2f(347.5, 292.5);//4
+		glVertex2f(377.5, 277.5);//5
+		glVertex2f(332.5, 252.5);//6
+		glVertex2f(300, 267.5);//7
+		glVertex2f(265, 250);//8
+	glEnd();
+
+
+
+
+}
+
+// this might be good...  And it is
+void plantLayout()
+{
+	//Clearing the buffer..
+
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	//Dark background..
+	glColor3f(0, 0, 0);
+	glBegin(GL_POLYGON);
+		glVertex2f(0, 0);
+		glVertex2f(0, 500);
+		glVertex2f(500, 500);
+		glVertex2f(500, 0);
+	glEnd();
+
+	drawBrownBase();
+
+	drawGreenBase();
+
+	drawPlantFloor();
+
+	drawTrees();
+
+	drawCoolingTowers();
+	
+	drawOfficeRoom();
+		
+	//delay(1000);
+
+	glFlush();
+	//glutPostRedisplay();
+	
 }
 
 
@@ -1641,6 +1923,7 @@ void electroCity()
 	drawStars();
 
 
+
 	//Buildings with Fwindows
 	for(float i = 0.0; i <= 0.9; ){
 
@@ -1811,7 +2094,7 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 	chckWin();
 	//Introduction
-	title();
+	//title();
 	//displayMenus();
 
 	//Scene 1 Electricity
@@ -1820,83 +2103,18 @@ void display(void)
 	//Scene 2 Electricity Text
 	//sceneElectricity();
 
+	//scene 3 workflow
 	//display1();
 
-	//plantLayout();
+	//scene 4 plant layout
+	plantLayout();
 
     glFlush();
 	glutPostRedisplay();
 	 
 }
 
-//Codes for all 3D will be below here
-//Everything here only
 
-void wall(double thickness, float cSize)
-{
-	glPushMatrix();
-	glTranslated(0.5,0.5*thickness,0.5);
-	glScaled(1.0,thickness,1.0);
-	glutSolidCube(cSize);
-	glPopMatrix();
-}
-
-void displaySolids()
-{
-	
-	GLfloat mat_ambient[]={0.72f, 0.45f, 0.20f , 1.0f};
-	GLfloat mat_diffuse[]={0.1f,0.1f,0.10f,1.0f};
-
-	GLfloat mat_specular[]={1.0f,1.0f,1.0f,1.0f};
-	GLfloat mat_shininess[]={80.0f};
-
-	glMaterialfv(GL_FRONT,GL_AMBIENT,mat_ambient);
-	glMaterialfv(GL_FRONT,GL_DIFFUSE,mat_diffuse);
-	glMaterialfv(GL_FRONT,GL_SPECULAR,mat_specular);
-	glMaterialfv(GL_FRONT,GL_SHININESS,mat_shininess);
-
-	GLfloat lightint[]={0.5f,0.5f,0.5f,1.0f};
-	GLfloat lightpos[]={2.0f,6.0f,3.0f,0.0f};
-
-	glLightfv(GL_LIGHT0,GL_POSITION,lightpos);
-	glLightfv(GL_LIGHT0,GL_DIFFUSE,lightint);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	double winht=1.0;
-	glOrtho(-winht*64/48.0,winht*64/48.0,-winht,winht,0.1,100.0);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(2.3,1.3,2.0,0.0,0.25,0.0,0.0,1.0,0.0);
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-
-	//Brown Base
-	//GLfloat mat_ambient[]={47/255,0.49f,0.24f,1.0f};
-	glPushMatrix();
-	glRotated(45.0, 0.0, 0.0, 0.0);	
-	wall(0.15, 2.3);
-	glPopMatrix();
-
-	//Lets make it green
-	
-	glPushMatrix();
-	//GLfloat mat_ambient[]={0.137255f, 0.556863f, 0.137255f , 1.0f};
-	//glMaterialfv(GL_FRONT,GL_AMBIENT,mat_ambient);
-	glRotated(45.0, 0.0, 0.0, 0.0);	
-	wall(0.17, 2.2);
-	glPopMatrix();
-
-
-
-	glFlush();
-
-}
-
-
-
-//ends the complete 3D code
 
 
 void main()
@@ -1913,7 +2131,7 @@ void main()
 
 			glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
 
-			//For 3D
+			////For 3D
 			//glEnable(GL_LIGHTING);
 			//glEnable(GL_LIGHT0);
 			//glShadeModel(GL_SMOOTH);
@@ -1935,73 +2153,4 @@ void main()
 			glutMainLoop();
 }
 
-/**
-	int optionn;
-	for(;;){
-	printf("\n1. 2D \n2. 3D\n");
-	scanf_s( "%d", &optionn);
-	
-	switch(optionn)
-	{
-	case 1 :
-			//glutInit(&argc,argv);
-			glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB|GLUT_DEPTH);
-			glutInitWindowSize(500,500);
-			glutInitWindowPosition(0, 0);
-			glutCreateWindow("Thermal Plant");
 
-			//GL BLEND enabled
-			glEnable(GL_BLEND);
-			glEnable(GL_POINT_SMOOTH);	
-
-			glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
-
-			//For 3D
-			//glEnable(GL_LIGHTING);
-			//glEnable(GL_LIGHT0);
-			//glShadeModel(GL_SMOOTH);
-			//glEnable(GL_DEPTH_TEST);
-			//glEnable(GL_NORMALIZE);
-
-			glutReshapeFunc(myReshape);
-			glutDisplayFunc(display);
-			glutMouseFunc(mouse);
-			glutKeyboardFunc(keys);
-	
-			//just a message
-			printf("Works and Looks Best in 500X500 or default window size.....!!\n");
-	
-
-			glClearColor(1.0,1.0,1.0,1.0);
-			glColor3f(1.0,0.0,1.0);
-			myinit();
-			glutMainLoop();
-		printf("Some code here\n");
-		break;
-	case 2 :
-		glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-		glutInitWindowSize(600, 600);
-		glutInitWindowPosition(0,0);
-		glutCreateWindow("3-D Layout of Power Plant");
-		glutDisplayFunc(displaySolids);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT0);
-		glShadeModel(GL_SMOOTH);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_NORMALIZE);
-		glClearColor(0, 0, 0, 1);
-		glViewport(0, 0, 600, 600);
-		glutMainLoop();
-
-
-		printf("Works and looks best in its default window size!!\n");
-		break;
-	default :
-		printf("Wrong input\n");
-		exit(0);
-
-	}
-
-	}
-}
-**/
